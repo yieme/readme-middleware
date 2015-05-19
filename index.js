@@ -4,13 +4,17 @@
  *  @module     readme-middleware
  */
 'use strict';
-var fs       = require('fs')
-var hogan    = require("hogan.js")
-var index    = fs.readFileSync(__dirname     + '/index.mustache', 'utf8')
-var pkg      = fs.readFileSync(process.cwd() + '/package.json', 'utf8')
-var template = hogan.compile(index)
-pkg.readme   = fs.readFileSync(process.cwd() + '/README.md', 'utf8')
-var page     = template.render(pkg)
+var fs         = require('fs')
+var hogan      = require("hogan.js")
+var path       = require('path')
+var pkgPath    = path.normalize(process.cwd() + '/package.json')
+var indexPath  = path.normalize(__dirname     + '/index.mustache')
+var readmePath = path.normalize(process.cwd() + '/README.md')
+var index      = fs.readFileSync(indexPath, 'utf8')
+var pkg        = JSON.parse(fs.readFileSync(pkgPath, 'utf8'))
+var template   = hogan.compile(index)
+pkg.readme     = fs.readFileSync(readmePath, 'utf8')
+var page       = template.render(pkg)
 
 function readmeMiddleware(req, res, next) {
   if (req.path == '/') {
