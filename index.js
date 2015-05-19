@@ -23,11 +23,4 @@ function readmeMiddleware(req, res, next) {
 
 
 
-function server(options) {
-  return require('middle-server')(options)
-}
-
-
-
 module.exports        = readmeMiddleware
-module.exports.server = server
