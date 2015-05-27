@@ -1,6 +1,6 @@
 {
   "name": "readme-middleware",
-  "version": "0.1.6",
+  "version": "0.1.7",
   "description": "Readme middleware",
   "main": "index.js",
   "scripts": {
